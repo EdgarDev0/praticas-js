@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questão 01 - JavaScript</title>
+    <script src="./q1.js" defer="true"></script>
+
+</head>
+
+<body>
+
+    <h1>QUESTÃO 01 - JavaScript</h1>
+
+    <form id="formConversor">
+
+        <label for="valorReais">Valor em R$:</label>
+
+        <input
+
+        type="number" 
+        min="0" step="0.01" 
+        id="valorReais" 
+        placeholder="R$ 0,00"
+        required
+        >
+
+        <label for="cotacao">Cotação do dolár</label>
+        <input
+
+        type="number"
+        min="0"
+        id="cotacao"
+        placeholder="US$ 0,00"
+        required
+
+        >
+
+        <button type="submit">Converter</button>
+    </form>
+
+    <p id="resultado"></p>
+
+</body>
+
+</html>
