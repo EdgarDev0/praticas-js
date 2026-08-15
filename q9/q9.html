@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prática 09 - JavaScript</title>
+    <script src="./q9.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="../index.html">Voltar ao menu de questões.</a>
+        </nav>
+    </header>
+
+    <h1>Prática 09 - JS</h1>
+
+    <h2>
+        Escreva um programa que encontre todos os números ímpares localizados
+        entre dois valores quaisquer lidos do teclado.
+    </h2>
+
+    <form id="encontraImpares">
+
+        <label for="val1">Valor A:</label>
+
+        <input
+            id="val1"
+            type="number"
+            step="1"
+            required
+        >
+
+        <label for="val2">Valor B:</label>
+
+        <input
+            id="val2"
+            type="number"
+            step="1"
+            required
+        >
+
+        <button type="submit">Encontrar ímpares</button>
+        <button type="button" id="novoCalculo">Novo cálculo</button>
+
+    </form>
+
+    <p id="resultado"></p>
+
+</body>
+</html>

@@ -4,11 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prática 08 - JavaScript</title>
-    <script src="./q08.js" defer="true"></script>
+    <script src="./q08.js" defer></script>
 </head>
 <body>
-    <h1>Prática 08 - JavaScript</h1>
 
+    <header>
+        <nav>
+            <a href="../index.html">Voltar ao menu de questões.</a>
+        </nav>
+    </header>
+    
+    <h1>Prática 08 - JS</h1>
+    <h2>Dados n números inteiros positivos, calcule e exiba a soma dos que são primos.</h2>
+
+    <form id="calcSomaPrimos">
+        <label for="qtdNum">Quantidade (n):</label>
+
+        <input 
+        id="qtdNum"
+        type="number"
+        min="1"
+        step="1"
+        required
+        >
+
+        <label for="num">Valor:</label>
+
+        <input 
+            id="num"
+            type="number"
+            min="1"
+            step="1"
+        >
+
+        <button type="button" id="adicionar">Adicionar</button>
+        <button type="submit">Calcular</button>
+        <button type="button" id="novoCalculo">Novo cálculo</button>
+    </form>
+
+
+    <p id="numAdicionados"></p>
+    <p id="primos"></p>
     <p id="resultado"></p>
 </body>
 </html>
