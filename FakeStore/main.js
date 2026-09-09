@@ -59,43 +59,119 @@ botao.addEventListener("click", () => {
     });
 });
 
+let carrinho = [];
+let taxaBRL;
+
+const carrinhoSalvo = localStorage.getItem("carrinho");
+
+if (carrinhoSalvo) {
+  carrinho = JSON.parse(carrinhoSalvo);
+}
+
+const itensCarrinho = document.querySelector("#cart-items");
+
+function atualizaCarrinho() {
+    itensCarrinho.innerHTML = "";
+
+    let totalUSD = 0;
+    let totalBRL = 0;
+
+    for (let i = 0; i < carrinho.length; i++) {
+        const itemCarrinho = document.createElement("div");
+
+        const precoUSD = carrinho[i].price;
+        const precoBRL = precoUSD * taxaBRL;
+
+        itemCarrinho.innerHTML = `
+            <p>${carrinho[i].title}</p>
+            <p>US$ ${precoUSD.toFixed(2)} ≈ R$ ${precoBRL.toFixed(2)}</p>
+        `;
+
+        const botaoRemover = document.createElement("button");
+        botaoRemover.textContent = "Remover";
+
+        botaoRemover.addEventListener("click", () => {
+            carrinho.splice(i, 1);
+            salvaCarrinho();
+            atualizaCarrinho();
+        });
+
+        itemCarrinho.appendChild(botaoRemover);
+        itensCarrinho.appendChild(itemCarrinho);
+
+        totalUSD += precoUSD;
+        totalBRL += precoBRL;
+    }
+
+    document.querySelector("#cart-total").textContent =
+        `US$ ${totalUSD.toFixed(2)} ≈ R$ ${totalBRL.toFixed(2)}`;
+}
+
+function salvaCarrinho() {
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+}
 
 fetch('https://fakestoreapi.com/products')
-  .then(response => response.json())
-  .then(data => {
+    .then(response => response.json())
+    .then(data => {
 
-    fetch('https://api.frankfurter.dev/v2/rate/USD/BRL')
-      .then(response => response.json())
-      .then(converte => {
+        fetch('https://api.frankfurter.dev/v2/rate/USD/BRL')
+            .then(response => response.json())
+            .then(converte => {
 
-        console.log(converte);
+                taxaBRL = converte.rate;
+                atualizaCarrinho();
 
-        const lista = document.querySelector("#listaDeProdutos");
+                console.log(converte);
 
-        for (let i = 0; i < data.length; i++) {
+                const lista = document.querySelector("#product-list");
 
-          const produto = data[i];
-          const item = document.createElement("li");
+                for (let i = 0; i < data.length; i++) {
 
-          const valConv = produto.price * converte.rate;
+                  const produto = data[i];
 
-          item.innerHTML = `
-            <h2>ID: ${produto.id} - ${produto.title}</h2>
-            <p>Price: US$ ${produto.price}</p>
+                  const item = document.createElement("div");
+                  item.classList.add("product-card");
 
-            <p class="precoBRL" style="display: none;">
-                Preço: R$ ${valConv.toFixed(2)}
-            </p>
+                  const botaoCarrinho = document.createElement("button");
+                  botaoCarrinho.classList.add("add-to-cart");
+                  botaoCarrinho.textContent = "Adicionar ao carrinho";
 
-            <p>${produto.description}</p>
-            <p>Categoria: ${produto.category}</p>
-            <img src="${produto.image}" 
-                alt="Imagem do produto número ${produto.id}">
-          `;
+                  botaoCarrinho.addEventListener("click", () => {
+                    carrinho.push(produto);
+                    salvaCarrinho();
+                    atualizaCarrinho();
 
-          lista.appendChild(item);
-        }
-      });
-  });
-    
-  
+                    console.log(carrinho);
+                  });
+
+                  const valConv = produto.price * converte.rate;
+
+                  item.innerHTML = `
+                  <h3>ID: ${produto.id} - ${produto.title}</h3>
+
+                  <p class="product-price">
+                  US$ ${produto.price}
+                  </p>
+
+                  <p class="precoBRL" style="display: none;">
+                  Preço: R$ ${valConv.toFixed(2)}
+                  </p>
+
+                  <p class="product-description">
+                  ${produto.description}
+                  </p>
+
+                  <p>Categoria: ${produto.category}</p>
+
+                  <img 
+                  src="${produto.image}" 
+                  alt="Imagem do produto número ${produto.id}"
+                  >
+                  `;
+
+                  item.appendChild(botaoCarrinho);
+                  lista.appendChild(item);
+                }
+            });
+    });

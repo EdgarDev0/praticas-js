@@ -1,16 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prática - FakeStore</title>
-    <script src="./main.js" defer></script>
-</head>
-<body>
-    <h1>Nossos Produtos</h1>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Teste - API FakeStore</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="./main.js" defer type="module"></script>
+    </head>
 
-    <button id="exibeBRL">Ver em R$|BRL</button>
+    <body>
+        <header>
+            <h1>Bem-vindo à nossa loja</h1>
+            <p>Encontre os melhores produtos com os melhores preços!</p>
+        </header>
 
-    <ul id="listaDeProdutos"></ul>
-</body>
+    <main>
+        <section id="products">
+            <h2>Produtos em destaque</h2>
+            
+            <button id="exibeBRL">Exibir/ocultar preços em reais</button>
+
+            <div id="product-list"></div>
+        </section>
+
+        <section id="cart">
+            <h2>Carrinho de Compras</h2>
+            <div id="cart-items"></div>
+            <p>Total: R$ <span id="cart-total">0.00</span></p>
+        </section>
+    </main>
+
+        <footer>
+            <p>&copy; 2026 Teste - API FakeStore. Todos os direitos reservados.</p>
+        </footer>
+    </body>
 </html>
